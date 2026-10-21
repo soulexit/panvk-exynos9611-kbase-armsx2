@@ -2,7 +2,7 @@
 
 ## Driver is not listed after import
 
-- Confirm the zip root: `unzip -l panvk-exynos9611-armsx2-v0.01.zip` must show `meta.json` and
+- Confirm the zip root: `unzip -l panvk-exynos9611-armsx2-v0.02.zip` must show `meta.json` and
   `libvulkan_freedreno.so` with no leading directory.
 - `meta.json` must be valid JSON and `libraryName` must be `libvulkan_freedreno.so`.
 - Re-download the zip; a truncated archive can fail silently.

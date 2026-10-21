@@ -9,7 +9,7 @@ The stable package, if installed, uses `com.armsx2`; the scripts detect either.
 
 ## 2. Download the driver
 
-Take `panvk-exynos9611-armsx2-v0.01.zip` from this repository's **Releases** page.
+Take `panvk-exynos9611-armsx2-v0.02.zip` from this repository's **Releases** page.
 
 Do **not** use the Winlator package here: ARMSX2's importer requires the library to be named
 `libvulkan_freedreno.so`, while Winlator expects `libvulkan_panfrost.so`. The two zips contain the
@@ -18,17 +18,22 @@ same driver under different names.
 Verify:
 
 ```sh
-sha256sum -c panvk-exynos9611-armsx2-v0.01.zip.sha256
+sha256sum -c panvk-exynos9611-armsx2-v0.02.zip.sha256
 ```
 
 ## 3. Import
 
 1. Open ARMSX2.
-2. Open **Settings**.
-3. Open **GPU driver**.
-4. Tap **Import** / **Import ZIP**.
+2. Open **Settings → Renderer**.
+3. Set **Graphics API** to **Vulkan**. The **GPU Driver** section appears below it.
+4. Open **GPU Driver → Import**.
 5. Pick the zip from Downloads.
-6. The driver should appear as **PanVK Exynos 9611 (Mali-G72 MP3)**.
+6. The driver should appear as **PanVK Exynos 9611 (Mali-G72 MP3)** with
+   `Mesa 26.3.0-devel / PanVK kbase JM` and be marked **Active**.
+7. Start a game with the Vulkan renderer.
+
+On the tested nightly, the **GPU Driver** row is hidden while Graphics API is set to **Auto**.
+Select **Vulkan** first, then import.
 
 ARMSX2's import error messages usually say what is wrong:
 

@@ -14,7 +14,8 @@ The driver is Mesa **PanVK** talking to the stock **Arm `mali_kbase`** kernel in
 | **Kernel / kbase** | Linux 4.14.364 / Arm DDK `r38p1-01bet0` |
 | **ARMSX2 tested** | `com.armsx2.nightly` **2.8.4-nightly.20261020** |
 | **Driver base** | [`JimVulkan/mali-panvk`](https://github.com/JimVulkan/mali-panvk) `fb3b49d`, Mesa 26.3.0-devel |
-| **Current build** | **v0.01 — debug, expect crashes** |
+| **Current build** | **v0.02 — debug; Kingdom Hearts boots and renders** |
+| **Tested game** | Kingdom Hearts (USA), `SLUS-20370` — 33–45 FPS OSD / 65–88 FPS PerfLog at native, 30 FPS at 2x |
 
 > [!WARNING]
 > Experimental driver. A bad GPU job can hang the emulator or the phone's GPU. Keep the system
@@ -28,7 +29,7 @@ root under the name **`libvulkan_freedreno.so`** (the Adreno/Turnip convention),
 that layout:
 
 ```text
-panvk-exynos9611-armsx2-v0.01.zip
+panvk-exynos9611-armsx2-v0.02.zip
 ├── meta.json
 ├── libvulkan_freedreno.so     # PanVK binary, renamed for ARMSX2's importer
 ├── NOTICE.txt
@@ -61,9 +62,14 @@ build what to fix.
 
 | Build | Date | ARMSX2 version | Driver listed | Driver selected | Game boot | In-game | Notes |
 |---|---|---|---|---|---|---|---|
-| v0.01 | 2026-10-21 | 2.8.4-nightly.20261020 | pending | pending | pending | pending | first package |
+| v0.01 | 2026-10-21 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | first package; driver binary unchanged in v0.02 |
+| v0.02 | 2026-10-21 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | Kingdom Hearts native + 2x; no visible corruption |
 
-See [`docs/TEST-RESULTS.md`](docs/TEST-RESULTS.md).
+**Tested:** Kingdom Hearts (USA), `SLUS-20370`, CRC `0F6B6315`, on the Destiny Islands scene at
+native and 2x internal resolution. Native uncapped held 33–45 FPS in the OSD and 65–88 FPS in
+ARMSX2's 30-second `PerfLog`; 2x held the 30 FPS cap at 98–100% speed. Import was done entirely
+through ARMSX2's **GPU Driver → Import** path. See
+[`docs/TEST-RESULTS.md`](docs/TEST-RESULTS.md) for the full logs and caveats.
 
 ## Requirements
 
@@ -86,12 +92,12 @@ Meson, Ninja, Python 3, glslang, LLVM 20. See
 
 ### Option A — import in ARMSX2 (no root, recommended)
 
-1. Download `panvk-exynos9611-armsx2-v0.01.zip` from **Releases**.
+1. Download `panvk-exynos9611-armsx2-v0.02.zip` from **Releases**.
 2. Copy it to the phone.
-3. Open **ARMSX2 → Settings → GPU driver**.
-4. Tap **Import** (or the add button) and choose the zip.
+3. Open **ARMSX2 → Settings → Renderer** and set **Graphics API** to **Vulkan**.
+4. Open **GPU Driver → Import** (the section appears after Vulkan is selected) and choose the zip.
 5. Select **PanVK Exynos 9611 (Mali-G72 MP3)**.
-6. In the game settings, set the renderer to **Vulkan**, then start the game.
+6. Start the game with the Vulkan renderer.
 7. On first failure, switch back to **System Vulkan driver** and collect the logs.
 
 The importer requires `meta.json` and `libvulkan_freedreno.so` at the **zip root**. If you get
@@ -152,7 +158,7 @@ ARMSX2 and packages it.
 ./scripts/package.sh --so /path/to/libvulkan_panfrost.so
 ```
 
-Output: `dist/panvk-exynos9611-armsx2-v0.01.zip` and `.sha256`.
+Output: `dist/panvk-exynos9611-armsx2-v0.02.zip` and `.sha256`.
 
 ## Testing
 

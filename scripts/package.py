@@ -43,8 +43,8 @@ def main():
             "name": "PanVK Exynos 9611 (Mali-G72 MP3)",
             "description": (
                 "Mesa PanVK over mali_kbase/JM for the Samsung Galaxy A51 (Exynos 9611, "
-                "Mali-G72 MP3). Debug build. ARMSX2: Settings > GPU driver > Import, then "
-                "select this driver and use the Vulkan renderer."
+                "Mali-G72 MP3). Debug build, tested with Kingdom Hearts (USA). ARMSX2: "
+                "Settings > Renderer > Graphics API > Vulkan, then GPU Driver > Import."
             ),
             "author": "panvk-exynos9611",
             "packageVersion": version,
@@ -60,6 +60,14 @@ def main():
         shutil.copy2(os.path.join(ROOT, "NOTICE.md"), os.path.join(stage, "NOTICE.txt"))
         shutil.copy2(os.path.join(ROOT, "LICENSE"), os.path.join(stage, "LICENSE"))
 
+        source_info = os.path.join(ROOT, "build", "prebuilt", "driver", "BUILD-INFO.txt")
+        source_tag = version
+        if os.path.isfile(source_info):
+            for line in open(source_info, encoding="utf-8"):
+                if line.startswith("version="):
+                    source_tag = line.split("=", 1)[1].strip()
+                    break
+
         info = [
             "package=%s" % name,
             "version=%s" % version,
@@ -71,9 +79,8 @@ def main():
             "package_library=%s" % "libvulkan_freedreno.so",
             "target=ARMSX2 (com.armsx2.nightly / com.armsx2)",
             "source_repo=https://github.com/soulexit/panvk-exynos9611-kbase-termux",
-            "source_tag=v%s" % version,
+            "source_tag=v%s" % source_tag,
         ]
-        source_info = os.path.join(ROOT, "build", "prebuilt", "driver", "BUILD-INFO.txt")
         if os.path.isfile(source_info):
             info.append("")
             info.append("[source build]")
