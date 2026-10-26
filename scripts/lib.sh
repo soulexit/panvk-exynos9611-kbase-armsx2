@@ -4,10 +4,12 @@ set -eu
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 VERSION=$(cat "$ROOT/VERSION")
+# The Termux driver release this package wraps; can lag or lead the package version.
+DRIVER_VERSION=${DRIVER_VERSION:-$(cat "$ROOT/DRIVER_VERSION" 2>/dev/null || echo "$VERSION")}
 DIST_DIR=${DIST_DIR:-$ROOT/dist}
 BUILD_ROOT=${BUILD_ROOT:-$ROOT/build}
 SOURCE_REPO=${SOURCE_REPO:-https://github.com/soulexit/panvk-exynos9611-kbase-termux.git}
-SOURCE_TAG=${SOURCE_TAG:-v$VERSION}
+SOURCE_TAG=${SOURCE_TAG:-v$DRIVER_VERSION}
 RELEASE_URL=${RELEASE_URL:-https://github.com/soulexit/panvk-exynos9611-kbase-termux/releases/download/$SOURCE_TAG}
 PACKAGE_NAME=panvk-exynos9611-armsx2-v$VERSION
 DRIVER_LIB=libvulkan_freedreno.so

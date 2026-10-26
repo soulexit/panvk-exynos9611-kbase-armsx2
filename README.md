@@ -14,7 +14,7 @@ The driver is Mesa **PanVK** talking to the stock **Arm `mali_kbase`** kernel in
 | **Kernel / kbase** | Linux 4.14.364 / Arm DDK `r38p1-01bet0` |
 | **ARMSX2 tested** | `com.armsx2.nightly` **2.8.4-nightly.20261020** |
 | **Driver base** | [`JimVulkan/mali-panvk`](https://github.com/JimVulkan/mali-panvk) `fb3b49d`, Mesa 26.3.0-devel |
-| **Current build** | **v0.02 — debug; Kingdom Hearts boots and renders** |
+| **Current build** | **v0.03 (driver v0.02) — debug; Kingdom Hearts boots and renders** |
 | **Tested game** | Kingdom Hearts (USA), `SLUS-20370` — 33–45 FPS OSD / 65–88 FPS PerfLog at native, 30 FPS at 2x |
 
 > [!WARNING]
@@ -29,7 +29,7 @@ root under the name **`libvulkan_freedreno.so`** (the Adreno/Turnip convention),
 that layout:
 
 ```text
-panvk-exynos9611-armsx2-v0.02.zip
+panvk-exynos9611-armsx2-v0.03.zip
 ├── meta.json
 ├── libvulkan_freedreno.so     # PanVK binary, renamed for ARMSX2's importer
 ├── NOTICE.txt
@@ -64,6 +64,7 @@ build what to fix.
 |---|---|---|---|---|---|---|---|
 | v0.01 | 2026-10-21 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | first package; driver binary unchanged in v0.02 |
 | v0.02 | 2026-10-21 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | Kingdom Hearts native + 2x; no visible corruption |
+| v0.03 | 2026-10-26 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | driver v0.02 (Mesa 27.0-devel + fixes); Kingdom Hearts at parity, no GPU fault |
 
 **Tested:** Kingdom Hearts (USA), `SLUS-20370`, CRC `0F6B6315`, on the Destiny Islands scene at
 native and 2x internal resolution. Native uncapped held 33–45 FPS in the OSD and 65–88 FPS in
@@ -92,7 +93,7 @@ Meson, Ninja, Python 3, glslang, LLVM 20. See
 
 ### Option A — import in ARMSX2 (no root, recommended)
 
-1. Download `panvk-exynos9611-armsx2-v0.02.zip` from **Releases**.
+1. Download `panvk-exynos9611-armsx2-v0.03.zip` from **Releases**.
 2. Copy it to the phone.
 3. Open **ARMSX2 → Settings → Renderer** and set **Graphics API** to **Vulkan**.
 4. Open **GPU Driver → Import** (the section appears after Vulkan is selected) and choose the zip.
@@ -158,7 +159,7 @@ ARMSX2 and packages it.
 ./scripts/package.sh --so /path/to/libvulkan_panfrost.so
 ```
 
-Output: `dist/panvk-exynos9611-armsx2-v0.02.zip` and `.sha256`.
+Output: `dist/panvk-exynos9611-armsx2-v0.03.zip` and `.sha256`.
 
 ## Testing
 
@@ -182,8 +183,10 @@ Output: `dist/panvk-exynos9611-armsx2-v0.02.zip` and `.sha256`.
   Lite; the A51's Android 16 + kbase r38 is new.
 - **ARMSX2 custom drivers are Adreno-oriented.** Listing/selecting a Mali ICD is not guaranteed by
   the app. Treat this repository as an experiment with a clear log trail.
-- **No native BCn, no D3D12/vkd3d-proton.** PS2 texture formats are mostly handled by the emulator;
-  BCn is not the blocker here.
+- **No D3D12/vkd3d-proton.** Irrelevant for PS2 emulation. BCn is emulated since driver v0.02 but
+  PS2 games do not use it.
+- **Kingdom Hearts is EE-bound** on this SoC (EE 100% uncapped): driver changes do not move its
+  frame rate; GS thread time is the same on driver v0.01 and v0.02.
 - **GS/tessellation/XFB are compute-emulated** and slow on three G72 cores.
 - **Shared RAM.** PS2 emulation plus a Vulkan driver on a 6 GB phone leaves little headroom.
 - **Android 16 gralloc** can break presentation while offscreen rendering works.
@@ -208,7 +211,8 @@ failure classes.
 
 ## Versioning and releases
 
-`v0.01`, `v0.02`, … follow the source driver. Each release contains:
+`v0.01`, `v0.02`, … are package versions. From v0.03 the wrapped driver version is in
+`DRIVER_VERSION` (v0.03 wraps driver v0.02). Each release contains:
 
 - `panvk-exynos9611-armsx2-v0.0x.zip`
 - `.sha256`

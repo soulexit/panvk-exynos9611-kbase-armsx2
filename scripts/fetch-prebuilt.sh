@@ -5,7 +5,7 @@
 set -eu
 . "$(dirname -- "$0")/lib.sh"
 
-url="$RELEASE_URL/panvk-exynos9611-termux-v$VERSION.zip"
+url="$RELEASE_URL/panvk-exynos9611-termux-v$DRIVER_VERSION.zip"
 expected=""
 while [ $# -gt 0 ]; do
     case "$1" in

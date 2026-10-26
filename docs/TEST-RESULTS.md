@@ -16,7 +16,21 @@
 
 | Package | Date | Driver listed | Driver selectable | Vulkan renderer | Game boot | Gameplay | Notes |
 |---|---|---|---|---|---|---|---|
+| v0.03 (driver v0.02) | 2026-10-26 | yes | yes | yes | yes | yes | Kingdom Hearts native + 2x; parity with driver v0.01, no GPU fault |
 | v0.02 (driver v0.01) | 2026-10-21 | yes | yes | yes | yes | yes | Kingdom Hearts (USA), native and 2x, no visible corruption |
+
+## Driver v0.02 comparison (package v0.03)
+
+Same save state (Destiny Islands, facing the shack), driver switched per game in ARMSX2's settings,
+eight OSD samples 3 s apart after loading the state:
+
+| Driver | Uncapped native | 30 FPS cap, native | 30 FPS cap, 2x |
+|---|---|---|---|
+| v0.01 | 33–45 FPS | 29.7–30.0 FPS, GS 9.7–12.8 ms | 26.4–30.0 FPS |
+| v0.02 | 30–46 FPS | 29.5–30.0 FPS, GS 9.7–10.9 ms | 27.4–30.0 FPS |
+
+EE stays at 100% uncapped: the game is CPU-bound here and the frame rate is set by the EE recompiler
+and thermals, not by the driver. No GPU fault was logged with either driver.
 
 ## Run 1 — native resolution, uncapped
 
