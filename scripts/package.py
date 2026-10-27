@@ -49,7 +49,7 @@ def main():
             "author": "panvk-exynos9611",
             "packageVersion": version,
             "vendor": "Mesa",
-            "driverVersion": "Mesa 27.0.0-devel / PanVK kbase JM (driver v0.02)",
+            "driverVersion": "Mesa 27.0.0-devel / PanVK kbase JM (driver v0.03)",
             "minApi": 31,
             "libraryName": "libvulkan_freedreno.so",
         }

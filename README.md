@@ -14,7 +14,7 @@ The driver is Mesa **PanVK** talking to the stock **Arm `mali_kbase`** kernel in
 | **Kernel / kbase** | Linux 4.14.364 / Arm DDK `r38p1-01bet0` |
 | **ARMSX2 tested** | `com.armsx2.nightly` **2.8.4-nightly.20261020** |
 | **Driver base** | [`JimVulkan/mali-panvk`](https://github.com/JimVulkan/mali-panvk) `fb3b49d`, Mesa 26.3.0-devel |
-| **Current build** | **v0.03 (driver v0.02) — debug; Kingdom Hearts boots and renders** |
+| **Current build** | **v0.04 (driver v0.03) — debug; Kingdom Hearts (v0.03), also the Eden package** |
 | **Tested game** | Kingdom Hearts (USA), `SLUS-20370` — 33–45 FPS OSD / 65–88 FPS PerfLog at native, 30 FPS at 2x |
 
 > [!WARNING]
@@ -29,7 +29,7 @@ root under the name **`libvulkan_freedreno.so`** (the Adreno/Turnip convention),
 that layout:
 
 ```text
-panvk-exynos9611-armsx2-v0.03.zip
+panvk-exynos9611-armsx2-v0.04.zip
 ├── meta.json
 ├── libvulkan_freedreno.so     # PanVK binary, renamed for ARMSX2's importer
 ├── NOTICE.txt
@@ -65,6 +65,7 @@ build what to fix.
 | v0.01 | 2026-10-21 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | first package; driver binary unchanged in v0.02 |
 | v0.02 | 2026-10-21 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | Kingdom Hearts native + 2x; no visible corruption |
 | v0.03 | 2026-10-26 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | driver v0.02 (Mesa 27.0-devel + fixes); Kingdom Hearts at parity, no GPU fault |
+| v0.04 | 2026-10-28 | 2.8.4-nightly.20261020 | — | — | — | — | driver v0.03; not re-tested in ARMSX2. **The same zip imports in Eden** (Settings → GPU driver), where Zelda: Echoes of Wisdom runs in-game |
 
 **Tested:** Kingdom Hearts (USA), `SLUS-20370`, CRC `0F6B6315`, on the Destiny Islands scene at
 native and 2x internal resolution. Native uncapped held 33–45 FPS in the OSD and 65–88 FPS in
@@ -93,7 +94,7 @@ Meson, Ninja, Python 3, glslang, LLVM 20. See
 
 ### Option A — import in ARMSX2 (no root, recommended)
 
-1. Download `panvk-exynos9611-armsx2-v0.03.zip` from **Releases**.
+1. Download `panvk-exynos9611-armsx2-v0.04.zip` from **Releases**.
 2. Copy it to the phone.
 3. Open **ARMSX2 → Settings → Renderer** and set **Graphics API** to **Vulkan**.
 4. Open **GPU Driver → Import** (the section appears after Vulkan is selected) and choose the zip.
@@ -159,7 +160,7 @@ ARMSX2 and packages it.
 ./scripts/package.sh --so /path/to/libvulkan_panfrost.so
 ```
 
-Output: `dist/panvk-exynos9611-armsx2-v0.03.zip` and `.sha256`.
+Output: `dist/panvk-exynos9611-armsx2-v0.04.zip` and `.sha256`.
 
 ## Testing
 
