@@ -14,7 +14,7 @@ The driver is Mesa **PanVK** talking to the stock **Arm `mali_kbase`** kernel in
 | **Kernel / kbase** | Linux 4.14.364 / Arm DDK `r38p1-01bet0` |
 | **ARMSX2 tested** | `com.armsx2.nightly` **2.8.4-nightly.20261020** |
 | **Driver base** | [`JimVulkan/mali-panvk`](https://github.com/JimVulkan/mali-panvk) `fb3b49d`, Mesa 26.3.0-devel |
-| **Current build** | **v0.05 (driver v0.04) — debug, not re-tested in apps; also the Eden package** |
+| **Current build** | **v0.05 (driver v0.04) — debug; Eden checked, ARMSX2 not re-tested; also the Eden package** |
 | **Tested game** | Kingdom Hearts (USA), `SLUS-20370` — 33–45 FPS OSD / 65–88 FPS PerfLog at native, 30 FPS at 2x |
 
 > [!WARNING]
@@ -66,7 +66,7 @@ build what to fix.
 | v0.02 | 2026-10-21 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | Kingdom Hearts native + 2x; no visible corruption |
 | v0.03 | 2026-10-26 | 2.8.4-nightly.20261020 | yes | yes | yes | yes | driver v0.02 (Mesa 27.0-devel + fixes); Kingdom Hearts at parity, no GPU fault |
 | v0.04 | 2026-10-28 | 2.8.4-nightly.20261020 | — | — | — | — | driver v0.03; not re-tested in ARMSX2. **The same zip imports in Eden** (Settings → GPU driver), where Zelda: Echoes of Wisdom runs in-game |
-| v0.05 | 2026-10-30 | 2.8.4-nightly.20261020 | — | — | — | — | driver v0.04 (Vulkan CTS fixes); released without an app test in ARMSX2 or Eden — go back to v0.04 if it regresses |
+| v0.05 | 2026-10-30 | 2.8.4-nightly.20261020 | — | — | — | — | driver v0.04 (Vulkan CTS fixes); not re-tested in ARMSX2. **Eden:** Zelda: Echoes of Wisdom in-game, 6.2–6.9 FPS, 0 GPU faults (same as driver v0.03) |
 
 **Tested:** Kingdom Hearts (USA), `SLUS-20370`, CRC `0F6B6315`, on the Destiny Islands scene at
 native and 2x internal resolution. Native uncapped held 33–45 FPS in the OSD and 65–88 FPS in
