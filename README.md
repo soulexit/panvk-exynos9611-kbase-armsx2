@@ -1,5 +1,12 @@
 # PanVK for ARMSX2 — Exynos 9611 / Mali-G72 MP3
 
+> [!IMPORTANT]
+> **This repository is archived.** The driver for Winlator, Eden, ARMSX2 and Termux now lives in
+> one repository, **[soulexit/panvk-exynos9611](https://github.com/soulexit/panvk-exynos9611)**,
+> which continues this one's history and publishes one zip per release (from 0.05). Releases here
+> stay downloadable.
+
+
 **Custom Vulkan driver packages for [ARMSX2](https://github.com/ARMSX2/ARMSX2)** on the
 **Samsung Galaxy A51 (SM-A515F)** and other **Exynos 9611 + Mali-G72 MP3** phones.
 
